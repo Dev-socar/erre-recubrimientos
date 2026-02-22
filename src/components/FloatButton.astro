@@ -1,0 +1,46 @@
+<a
+  href="#hero"
+  id="backToTop"
+  class="fixed bottom-5 right-5 bg-yellow-500 text-white p-3 rounded-full shadow-lg hover:bg-yellow-600 opacity-0 transition-all duration-300 z-99"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 rotate-90"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+  </svg>
+</a>
+
+<script>
+  const hero = document.getElementById("hero") as HTMLHeadElement;
+  const button = document.getElementById("backToTop") as HTMLAnchorElement;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+
+     
+      if (!entry.isIntersecting) {
+        button?.classList.remove("opacity-0");
+        button?.classList.add("opacity-100");
+      } else {
+        button?.classList.remove("opacity-100");
+        button?.classList.add("opacity-0");
+      }
+    },
+    {
+      threshold: 0, 
+    },
+  );
+
+  if (hero) {
+    observer.observe(hero);
+  }
+</script>

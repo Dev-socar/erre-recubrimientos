@@ -1,0 +1,80 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { type Service } from "@/types/Service";
+import { type Image } from "@/types/Image";
+import { services } from "@/const/Services";
+import { imagesServices } from "@/const/ImagesServices";
+import ServiceItem from "@/components/ServiceItem.astro";
+import BentoImageItem from "@/components/BentoImageItem.astro";
+import { reviewsList } from "@/const/Reviews";
+import { type Review } from "@/types/Review";
+import ReviewCard from '@/components/ReviewCard.astro';
+
+const images: Image[] = imagesServices;
+const reviews: Review[] = reviewsList;
+---
+
+<Layout>
+  <main>
+    <section
+      class="container mx-auto max-w-5xl px-2 md:px-5 py-10 lg:py-20"
+      id="servicios"
+    >
+      <h2 class="mb-4 text-subheading">Nuestros Servicios</h2>
+      <p class="text-body mb-4 text-primary">
+        En <span class="font-semibold text-secondary">ERRE Recubrimientos</span> transformamos
+        espacios en lugares duraderos, funcionales y estéticamente impecables. Somos
+        especialistas en recubrimientos residenciales y comerciales, ofreciendo soluciones
+        integrales que elevan la calidad y presentación de cada proyecto.
+      </p>
+      <div class="mt-10 space-y-5 md:space-y-0">
+        {
+          services.map((service: Service, index) => (
+            <ServiceItem service={service} index={index} />
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="container mx-auto max-w-5xl px-2 md:px-5 py-10"
+      id="trabajos"
+    >
+      <h2 class="text-subheading mb-4">Nuestros Trabajos Realizados</h2>
+      <p class="mb-4 text-primary text-body">
+        Cada proyecto refleja nuestro compromiso con la excelencia, la
+        creatividad y la atencion al detalle. Descubre una seleccion de nuestros
+        trabajos mas destacados.
+      </p>
+      <div>
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 auto-rows-[240px] grid-flow-row-dense gap-3"
+        >
+          {
+            images.map((image: Image, index) => (
+              <BentoImageItem image={image} index={index} />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="container mx-auto max-w-5xl px-2 md:px-5 py-10"
+      id="testimonios"
+    >
+      <h2 class="text-subheading mb-4">Lo Que Dicen Nuestros Clientes</h2>
+      <p class="mb-4 text-primary text-body">
+        La satisfaccion de nuestros clientes es nuestro mejor indicador de
+        exito. Estas son algunas de sus experiencias.
+      </p>
+      <div>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 grid-flow-row-dense"
+        >
+          {reviews.map((review) => <ReviewCard review={review} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

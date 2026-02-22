@@ -1,0 +1,85 @@
+@import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayThin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayRoman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueHaas";
+  src: url("/fonts/Neue/NeueHaasDisplayBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-primary: #5b5d5e;
+  --color-secondary: #efb63e;
+   --font-sans: "NeueHaas";
+}
+
+@layer components {
+  .link-desktop {
+    @apply relative inline-block;
+  }
+  .text-heading{
+    @apply text-4xl md:text-6xl ;
+  }
+  .text-subheading{
+    @apply text-3xl md:text-4xl lg:text-5xl font-light uppercase;
+  }
+  .text-body{
+    @apply text-base md:text-lg;
+  }
+
+  .link-desktop::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 h-0.5 w-full bg-yellow-500 origin-left scale-x-0 transition-transform duration-300 ease-out;
+  }
+
+  .link-desktop:hover::after {
+    @apply scale-x-100;
+  }
+  .bento-item {
+    @apply shadow-lg hover:shadow-2xl transition-shadow duration-500;
+  }
+}

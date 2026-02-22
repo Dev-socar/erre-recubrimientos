@@ -1,0 +1,43 @@
+---
+import { type Service } from "@/types/Service";
+
+interface Props {
+  service: Service;
+  index: number;
+}
+
+const { service, index } = Astro.props as Props;
+---
+
+<div
+  class="service-item opacity-0 translate-y-10 transition-all duration-700 flex flex-col md:flex-row h-96 lg:h-112.5 overflow-hidden"
+>
+  <div
+    class={`w-full h-full overflow-hidden rounded-xs ${index % 2 === 0 ? "" : "md:order-2"}`}
+  >
+    <img
+      src={service.imageUrl}
+      alt={service.name}
+      class="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+    />
+  </div>
+  <div class="w-full flex justify-center items-center">
+    <div class="lg:px-2">
+      <h3
+        class={`font-semibold text-lg mb-2 ${index % 2 !== 0 ? "md:text-left" : "md:text-right"}`}
+      >
+        {service.name}
+      </h3>
+      <p
+        class={`text-primary text-body ${index % 2 !== 0 ? "md:text-left" : "md:text-right"}`}
+      >
+        {service.description}
+      </p>
+      <a
+        href="#"
+        class={`text-secondary link-desktop mt-2 font-semibold ${index % 2 !== 0 ? "md:float-left" : "md:float-right"}`}
+        >Saber más</a
+      >
+    </div>
+  </div>
+</div>

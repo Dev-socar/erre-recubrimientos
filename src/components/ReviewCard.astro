@@ -1,0 +1,28 @@
+---
+import { type Review } from "@/types/Review";
+import ReviewStars from "./ReviewStars.astro";
+
+interface Props {
+  review: Review;
+}
+
+const { review } = Astro.props as Props;
+---
+
+<div
+  class={`review-item flex flex-col justify-center  relative rounded-xs p-6 bg-white shadow-lg opacity-0 translate-y-10 transition-all duration-700 hover:shadow-2xl ${
+    review.featured ? "md:col-span-2" : ""
+  }`}
+>
+  <ReviewStars rating={review.rating} />
+
+  {
+    review.text && (
+      <p class="mt-4 text-gray-600 leading-relaxed italic">"{review.text}"</p>
+    )
+  }
+
+  <div class="mt-4 font-semibold text-gray-900">
+    {review.author}
+  </div>
+</div>
