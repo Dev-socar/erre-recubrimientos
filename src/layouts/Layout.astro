@@ -1,7 +1,7 @@
 ---
 import FloatButton from '@/components/FloatButton.astro';
 import Hero from '../components/Hero.astro';
-import { site } from "@/const/site";
+import { Site } from "@/const/Site";
 import "../styles/global.css";
 ---
 
@@ -13,9 +13,9 @@ import "../styles/global.css";
     
     <!-- Primary SEO -->
     <title>ERRE Recubrimientos | Recubrimientos, Pintura e Impermeabilización</title>
-    <meta name="description" content={site.description} />
+    <meta name="description" content={Site.description} />
     <meta name="author" content="ERRE Recubrimientos" />
-    <link rel="canonical" href={site.url} />
+    <link rel="canonical" href={Site.url} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/logos/logotipo.png" />
@@ -23,16 +23,16 @@ import "../styles/global.css";
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ERRE Recubrimientos | Expertos en Recubrimientos" />
-    <meta property="og:description" content={site.description} />
-    <meta property="og:image" content={`${site.url}${site.image}`} />
-    <meta property="og:url" content={site.url} />
+    <meta property="og:description" content={Site.description} />
+    <meta property="og:image" content={`${Site.url}${Site.image}`} />
+    <meta property="og:url" content={Site.url} />
     <meta property="og:locale" content="es_MX" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ERRE Recubrimientos" />
-    <meta name="twitter:description" content={site.description} />
-    <meta name="twitter:image" content={`${site.url}${site.image}`} />
+    <meta name="twitter:description" content={Site.description} />
+    <meta name="twitter:image" content={`${Site.url}${Site.image}`} />
 
     <!-- Schema.org Local Business -->
     <script type="application/ld+json">
@@ -40,9 +40,9 @@ import "../styles/global.css";
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         name: "ERRE Recubrimientos",
-        image: `${site.url}${site.image}`,
-        url: site.url,
-        description: site.description,
+        image: `${Site.url}${Site.image}`,
+        url: Site.url,
+        description: Site.description,
         telephone: "+52 999 649 8926",
         address: {
           "@type": "PostalAddress",
@@ -86,7 +86,7 @@ import "../styles/global.css";
     <slot />
   </body>
 </html>
-
+<script type="module" src="/src/utils/setupLenis.ts"></script>
 <script>
   import { observerAnimations } from "@/utils/animations";
 
