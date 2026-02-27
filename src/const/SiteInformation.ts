@@ -1,4 +1,4 @@
-export const Site = {
+export const SiteInformation = {
   name: "ERRE Recubrimientos",
   url: "https://erre-recubrimientos.vercel.app/",
   description:

@@ -1,7 +1,7 @@
 ---
 import FloatButton from '@/components/FloatButton.astro';
 import Hero from '../components/Hero.astro';
-import { Site } from "@/const/Site";
+import { SiteInformation } from "@/const/SiteInformation";
 import "../styles/global.css";
 ---
 
@@ -13,9 +13,9 @@ import "../styles/global.css";
     
     <!-- Primary SEO -->
     <title>ERRE Recubrimientos | Recubrimientos, Pintura e Impermeabilización</title>
-    <meta name="description" content={Site.description} />
+    <meta name="description" content={SiteInformation.description} />
     <meta name="author" content="ERRE Recubrimientos" />
-    <link rel="canonical" href={Site.url} />
+    <link rel="canonical" href={SiteInformation.url} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/logos/logotipo.png" />
@@ -23,16 +23,16 @@ import "../styles/global.css";
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ERRE Recubrimientos | Expertos en Recubrimientos" />
-    <meta property="og:description" content={Site.description} />
-    <meta property="og:image" content={`${Site.url}${Site.image}`} />
-    <meta property="og:url" content={Site.url} />
+    <meta property="og:description" content={SiteInformation.description} />
+    <meta property="og:image" content={`${SiteInformation.url}${SiteInformation.image}`} />
+    <meta property="og:url" content={SiteInformation.url} />
     <meta property="og:locale" content="es_MX" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ERRE Recubrimientos" />
-    <meta name="twitter:description" content={Site.description} />
-    <meta name="twitter:image" content={`${Site.url}${Site.image}`} />
+    <meta name="twitter:description" content={SiteInformation.description} />
+    <meta name="twitter:image" content={`${SiteInformation.url}${SiteInformation.image}`} />
 
     <!-- Schema.org Local Business -->
     <script type="application/ld+json">
@@ -40,9 +40,9 @@ import "../styles/global.css";
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         name: "ERRE Recubrimientos",
-        image: `${Site.url}${Site.image}`,
-        url: Site.url,
-        description: Site.description,
+        image: `${SiteInformation.url}${SiteInformation.image}`,
+        url: SiteInformation.url,
+        description: SiteInformation.description,
         telephone: "+52 999 649 8926",
         address: {
           "@type": "PostalAddress",
