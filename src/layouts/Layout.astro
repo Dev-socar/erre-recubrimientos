@@ -3,6 +3,9 @@ import FloatButton from '@/components/FloatButton.astro';
 import Hero from '../components/Hero.astro';
 import { SiteInformation } from "@/const/SiteInformation";
 import "../styles/global.css";
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
 ---
 
 <!doctype html>
@@ -81,19 +84,25 @@ import "../styles/global.css";
   </head>
 
   <body>
+    <ScrollProgress />
     <FloatButton />
+    <WhatsAppFloat phone="529996498926" message="Hola, estoy interesado en sus servicios. ¿Podrían proporcionarme más información?" />
     <Hero />
     <slot />
+    <Footer />
   </body>
 </html>
 <script>
-  import { observerAnimations } from "@/utils/animations";
+  import { observerAnimations, initMobileMenu, initReviewAnimations,initScrollProgress } from "@/utils/animations";
 import { sendEmail } from '@/utils/SendEmail';
 import { setupLenis } from '@/utils/setupLenis';
 
   document.addEventListener("DOMContentLoaded", () => {
     setupLenis();
+    initScrollProgress();
+    initMobileMenu();
     sendEmail();
+    initReviewAnimations();
     observerAnimations("bento-item");
     observerAnimations("review-item");
     observerAnimations("service-item");

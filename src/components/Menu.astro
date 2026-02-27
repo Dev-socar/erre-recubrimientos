@@ -7,7 +7,7 @@ import { links } from "@/const/Links";
 >
   <div class="container mx-auto px-5 flex items-center justify-between">
     <a
-      href="/"
+      href="#hero"
       class="text-xl font-semibold tracking-widest text-white mix-blend-difference"
     >
       ERRE Recubrimientos
@@ -39,7 +39,7 @@ import { links } from "@/const/Links";
           <div class="overflow-hidden">
             <a
               href={link.url}
-              class="mobile-link inline-block text-5xl md:text-8xl font-black italic uppercase tracking-tighter text-white hover:text-[#EAB308] transition-colors duration-300 translate-y-full"
+              class="mobile-link inline-block text-5xl md:text-8xl  uppercase tracking-tighter text-white hover:text-[#EAB308] transition-colors duration-300 translate-y-full"
             >
               {link.text}
             </a>
@@ -54,70 +54,10 @@ import { links } from "@/const/Links";
       </p>
       <a
         href="mailto:errerecubrimientos@gmail.com"
-        class="text-white text-xl font-light hover:underline"
+        class="text-white text-xl font-light tracking-widest hover:underline"
       >
         errerecubrimientos@gmail.com
       </a>
     </div>
   </div>
 </div>
-
-<script>
-  import { gsap } from "gsap";
-
-  const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  const curtain = document.querySelector(".menu-curtain");
-  const content = document.querySelector(".menu-content");
-  const lines = document.querySelectorAll(".line");
-  const mobileLinks = document.querySelectorAll(".mobile-link");
-  const footerInfo = document.querySelector(".footer-info");
-
-  let isOpen = false;
-
-  // Timeline Maestro
-  const tl = gsap.timeline({ paused: true });
-
-  tl.set(menu, { autoAlpha: 1 })
-    .to(curtain, { translateY: "0%", duration: 0.6, ease: "expo.inOut" })
-    .to(
-      content,
-      { translateY: "0%", duration: 0.6, ease: "expo.inOut" },
-      "-=0.4",
-    )
-    .to(
-      mobileLinks,
-      { y: 0, duration: 0.8, stagger: 0.1, ease: "power4.out" },
-      "-=0.2",
-    )
-    .to(footerInfo, { opacity: 1, y: -20, duration: 0.4 }, "-=0.5");
-
-  // Función para cerrar el menú (reutilizable)
-  const toggleMenu = () => {
-    isOpen = !isOpen;
-
-    // Animación de la hamburguesa
-    gsap.to(lines[0], {
-      rotate: isOpen ? 45 : 0,
-      y: isOpen ? 5 : 0,
-      duration: 0.4,
-    });
-    gsap.to(lines[1], {
-      rotate: isOpen ? -45 : 0,
-      y: isOpen ? -5 : 0,
-      duration: 0.4,
-    });
-
-    isOpen ? tl.play() : tl.reverse();
-  };
-
-  // Evento para el botón principal
-  btn?.addEventListener("click", toggleMenu);
-
-  // NUEVO: Cerrar al hacer clic en cualquier enlace
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (isOpen) toggleMenu();
-    });
-  });
-</script>

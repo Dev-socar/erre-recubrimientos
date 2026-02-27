@@ -19,7 +19,7 @@ export const ItemsContact: ListItemContact[] = [
   {
     icono: LocationIcon,
     title: "Dirección",
-    text: "Calle 59 #123, Col. Centro, Mérida, Yucatán",
+    text: "C. 12, Morelos Oriente, 97174 Mérida, Yuc.",
     url: "https://maps.app.goo.gl/JuWxSXeAmHwWQNb98",
   },
   {

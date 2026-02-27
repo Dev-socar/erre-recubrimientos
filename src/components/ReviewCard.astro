@@ -10,19 +10,45 @@ const { review } = Astro.props as Props;
 ---
 
 <div
-  class={`review-item flex flex-col justify-center  relative rounded-xs p-6 bg-white shadow-lg opacity-0 translate-y-10 transition-all duration-700 hover:shadow-2xl ${
-    review.featured ? "md:col-span-2" : ""
-  }`}
+  class="review-item break-inside-avoid bg-white border border-gray-100 p-8 rounded-none flex flex-col relative group"
 >
-  <ReviewStars rating={review.rating} />
+  <span
+    class="absolute top-4 right-8 text-6xl font-serif text-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+    >“</span
+  >
 
-  {
-    review.text && (
-      <p class="mt-4 text-gray-600 leading-relaxed italic">"{review.text}"</p>
-    )
-  }
+  <div class="relative z-10">
+    <ReviewStars rating={review.rating} />
 
-  <div class="mt-4 font-semibold text-gray-900">
-    {review.author}
+    {
+      review.text && (
+        <p class="mt-6 text-lg text-gray-700 leading-snug font-light tracking-tight italic">
+          "{review.text}"
+        </p>
+      )
+    }
+
+    <div class="mt-8 flex items-center gap-3">
+      <div class="h-px w-8 bg-secondary"></div>
+      <span class="text-xs uppercase tracking-[0.2em] font-bold text-gray-900">
+        {review.author}
+      </span>
+    </div>
   </div>
 </div>
+
+
+<style>
+  .reviews-grid {
+    /* Evita que las columnas se rompan de forma fea */
+    orphans: 1;
+    widows: 1;
+  }
+
+  .review-item {
+    /* Evita que una card se divida entre dos columnas */
+    display: inline-block;
+    width: 100%;
+    will-change: transform, opacity;
+  }
+</style>

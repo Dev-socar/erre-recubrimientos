@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { type Service } from "@/types/Service";
 import { type Image } from "@/types/Image";
 import { type Review } from "@/types/Review";
 import { type ListItemContact } from "@/types/ListItemContact";
@@ -12,7 +11,7 @@ import { reviewsList } from "@/const/Reviews";
 import ReviewCard from "@/components/ReviewCard.astro";
 import { ItemsContact } from "@/const/ItemsContact";
 import ContactItem from "@/components/ContactItem.astro";
-
+import SectionHeader from "@/components/SectionHeader.astro";
 const images: Image[] = imagesServices;
 const reviews: Review[] = reviewsList;
 const itemsContact: ListItemContact[] = ItemsContact;
@@ -21,36 +20,32 @@ const itemsContact: ListItemContact[] = ItemsContact;
 <Layout>
   <main>
     <section
-      class="container mx-auto max-w-5xl px-2 md:px-5 py-10 lg:py-20"
+      class="container mx-auto max-w-7xl px-2 md:px-5 py-24 md:py-32"
       id="servicios"
     >
-      <h2 class="mb-4 text-subheading">Nuestros Servicios</h2>
-      <p class="text-body mb-4 text-primary">
-        En <span class="font-semibold text-secondary">ERRE Recubrimientos</span> transformamos
-        espacios en lugares duraderos, funcionales y estéticamente impecables. Somos
-        especialistas en recubrimientos residenciales y comerciales, ofreciendo soluciones
-        integrales que elevan la calidad y presentación de cada proyecto.
-      </p>
-      <div class="mt-10 space-y-5 md:space-y-0">
+      <SectionHeader
+        eyebrow="Nuestros Servicios"
+        title="Soluciones integrales para cada proyecto"
+      />
+      <div class="mt-10 border-t border-gray-200">
         {
-          services.map((service: Service, index) => (
-            <ServiceItem service={service} index={index} />
+          services.map((service, index) => (
+            <ServiceItem service={service} index={index + 1} />
           ))
         }
       </div>
     </section>
 
     <section
-      class="container mx-auto max-w-5xl px-2 md:px-5 py-10"
+      class="container mx-auto max-w-7xl px-2 md:px-5 py-24 md:py-32"
       id="trabajos"
     >
-      <h2 class="text-subheading mb-4">Nuestros Trabajos Realizados</h2>
-      <p class="mb-4 text-primary text-body">
-        Cada proyecto refleja nuestro compromiso con la excelencia, la
-        creatividad y la atencion al detalle. Descubre una seleccion de nuestros
-        trabajos mas destacados.
-      </p>
-      <div>
+      <SectionHeader
+        eyebrow="Nuestros Trabajos"
+        title="Calidad y durabilidad que hablan por sí mismas"
+      />
+
+      <div class="mt-20">
         <div
           class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 auto-rows-[240px] grid-flow-row-dense gap-3"
         >
@@ -64,19 +59,21 @@ const itemsContact: ListItemContact[] = ItemsContact;
     </section>
 
     <section
-      class="container mx-auto max-w-5xl px-2 md:px-5 py-10"
+      class="container mx-auto max-w-7xl px-2 md:px-5 py-24 md:py-32"
       id="testimonios"
     >
-      <h2 class="text-subheading mb-4">Lo Que Dicen Nuestros Clientes</h2>
-      <p class="mb-4 text-primary text-body">
-        La satisfaccion de nuestros clientes es nuestro mejor indicador de
-        exito. Estas son algunas de sus experiencias.
-      </p>
-      <div>
-        <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 grid-flow-row-dense"
-        >
-          {reviews.map((review) => <ReviewCard review={review} />)}
+      <SectionHeader
+        eyebrow="Testimonios"
+        title="Lo que dicen nuestros clientes satisfechos"
+      />
+
+      <div class="mt-20">
+        <div class="mt-20 px-4">
+          <div
+            class="reviews-grid columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8"
+          >
+            {reviews.map((review) => <ReviewCard review={review} />)}
+          </div>
         </div>
       </div>
     </section>
@@ -86,8 +83,12 @@ const itemsContact: ListItemContact[] = ItemsContact;
         class="container mx-auto max-w-7xl px-5 py-20 lg:flex lg:items-center lg:justify-between"
       >
         <div class="flex-1">
-          <h2 class="text-primary uppercase">Contacto</h2>
-          <p class="text-white text-5xl my-3">Hablemos de tu proyecto</p>
+          <SectionHeader
+            eyebrow="Contacto"
+            titleColor="primary"
+            textColor="white"
+            title="Hablemos de tu proyecto"
+          />
           <p class="text-primary mt-10 w-[70%] max-w-lg">
             Completa el formulario y nos pondremos en contacto contigo para
             ofrecerte una cotización personalizada sin compromiso.
