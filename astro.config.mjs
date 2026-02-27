@@ -5,6 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import vercel from "@astrojs/vercel";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -15,6 +17,7 @@ export default defineConfig({
   },
 
   output: "server",
-
   adapter: vercel(),
+  site: 'https://www.errerecubrimientos.com',
+  integrations: [sitemap()],
 });

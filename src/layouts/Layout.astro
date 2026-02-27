@@ -37,6 +37,10 @@ import ScrollProgress from '@/components/ScrollProgress.astro';
     <meta name="twitter:description" content={SiteInformation.description} />
     <meta name="twitter:image" content={`${SiteInformation.url}${SiteInformation.image}`} />
 
+    <head>
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+
     <!-- Schema.org Local Business -->
     <script type="application/ld+json">
       {JSON.stringify({
