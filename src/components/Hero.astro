@@ -2,19 +2,35 @@
 import Menu from "./Menu.astro";
 ---
 
-<header class="h-[75dvh] lg:h-dvh relative overflow-hidden" id="hero">
+<header class="h-dvh relative overflow-hidden" id="hero">
   <Menu />
 
-  <div class="absolute inset-0 -z-10">
-    <video autoplay muted loop playsinline class="w-full h-full object-cover">
-      <source src="/assets/videos/pintar.mp4" type="video/mp4" />
+  <div class="absolute inset-0 -z-10 bg-black">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/assets/images/servicios/foto01.webp"
+      class="w-full h-full object-cover video-fade-in"
+    >
+      <source
+        src="/assets/videos/hero-desktop.mp4"
+        type="video/mp4"
+        media="(min-width: 768px)"
+      />
+      <source
+        src="/assets/videos/hero-mobil.mp4"
+        type="video/mp4"
+        media="(max-width: 767px)"
+      />
     </video>
 
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/65"></div>
   </div>
 
   <div
-    class="absolute -translate-y-1/2 -translate-x-1/2 left-1/2 h-fit top-1/2  lg:left-20 lg:translate-0 z-10"
+    class="absolute -translate-y-1/2 -translate-x-1/2 left-1/2 h-fit top-1/2 lg:left-20 lg:translate-0 z-10"
   >
     <h1
       class="text-4xl md:text-5xl lg:text-6xl text-white text-center lg:text-left"
@@ -29,7 +45,7 @@ import Menu from "./Menu.astro";
     </p>
     <div class="md:flex md:justify-center lg:justify-start">
       <a
-        href="#"
+        href="#contacto"
         class="bg-black w-full text-center md:w-fit text-white font-bold py-4 px-8 inline-block mt-5"
       >
         Contáctanos

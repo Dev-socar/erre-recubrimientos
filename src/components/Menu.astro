@@ -2,108 +2,122 @@
 import { links } from "@/const/Links";
 ---
 
-<nav class="bg-white px-5 h-20 lg:h-25 absolute w-full top-0 left-0 z-50">
-  <div
-    class="container mx-auto flex items-center lg:items-end h-full lg:pb-5 justify-between"
-  >
-    <!-- Logo -->
+<nav
+  class="fixed w-full top-0 left-0 z-100 h-20 flex items-center blur-smoke bg-black/50 backdrop-blur-md"
+>
+  <div class="container mx-auto px-5 flex items-center justify-between">
     <a
-      href="#"
-      class="text-xl sm:text-2xl font-bold text-gray-800 lg:flex-1 lg:order-2 text-center"
+      href="/"
+      class="text-xl font-semibold tracking-widest text-white mix-blend-difference"
     >
       ERRE Recubrimientos
     </a>
 
-    <!-- Botón Hamburguesa -->
     <button
       id="menu-btn"
-      class="lg:hidden relative w-6 h-6 flex flex-col justify-center items-center"
+      class="group flex flex-col gap-2 p-2 outline-none cursor-pointer"
     >
-      <span
-        class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
-      ></span>
-      <span
-        class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out my-1"
-      ></span>
-      <span
-        class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
-      ></span>
+      <span class="line w-8 h-0.5 bg-white mix-blend-difference"></span>
+      <span class="line w-8 h-0.5 bg-white mix-blend-difference"></span>
     </button>
-
-    <!-- Menú Desktop -->
-    <ul class="hidden lg:flex space-x-6 lg:order-1 lg:flex-1 lg:justify-center">
-      {
-        links.map((link) => (
-          <li>
-            <a
-              href={link.url}
-              class="link-desktop uppercase font-light text-base relative"
-            >
-              {link.text}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-
-    <!-- Botón Desktop -->
-    <div class="hidden lg:order-3 lg:flex-1 lg:flex lg:justify-center">
-      <a href="#" class="bg-secondary px-3 py-1.5 text-white lg:text-lg">
-        Contrátanos
-      </a>
-    </div>
-  </div>
-
-  <!-- Menú Mobile -->
-  <div
-    id="mobile-menu"
-    class="lg:hidden absolute left-0 top-full w-full bg-white shadow-lg
-           overflow-hidden max-h-0 opacity-0
-           transition-all duration-300 ease-in-out"
-  >
-    <ul class="flex flex-col p-5 space-y-4">
-      {
-        links.map((link) => (
-          <li>
-            <a href={link.url} class="uppercase text-sm font-light">
-              {link.text}
-            </a>
-          </li>
-        ))
-      }
-      <li class="flex justify-center w-full mt-3">
-        <a
-          href="#"
-          class="bg-secondary w-full px-3 py-2 text-center text-white inline-block"
-        >
-          Contrátanos
-        </a>
-      </li>
-    </ul>
   </div>
 </nav>
 
+<div
+  id="mobile-menu"
+  class="invisible fixed inset-0 z-90 w-full h-screen overflow-hidden"
+>
+  <div class="menu-curtain absolute inset-0 bg-[#EAB308] translate-y-full">
+  </div>
+
+  <div
+    class="menu-content absolute inset-0 bg-[#121212] translate-y-full flex flex-col justify-center px-10"
+  >
+    <div class="flex flex-col space-y-6">
+      {
+        links.map((link) => (
+          <div class="overflow-hidden">
+            <a
+              href={link.url}
+              class="mobile-link inline-block text-5xl md:text-8xl font-black italic uppercase tracking-tighter text-white hover:text-[#EAB308] transition-colors duration-300 translate-y-full"
+            >
+              {link.text}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-20 opacity-0 footer-info">
+      <p class="text-sm uppercase tracking-[0.3em] text-gray-500 mb-2">
+        Cotiza tu proyecto hoy mismo
+      </p>
+      <a
+        href="mailto:errerecubrimientos@gmail.com"
+        class="text-white text-xl font-light hover:underline"
+      >
+        errerecubrimientos@gmail.com
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
+  import { gsap } from "gsap";
+
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
-  const spans = btn?.querySelectorAll("span") as NodeListOf<HTMLSpanElement>;
+  const curtain = document.querySelector(".menu-curtain");
+  const content = document.querySelector(".menu-content");
+  const lines = document.querySelectorAll(".line");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
+  const footerInfo = document.querySelector(".footer-info");
 
-  btn?.addEventListener("click", () => {
-    menu?.classList.toggle("max-h-0");
-    menu?.classList.toggle("max-h-96");
-    menu?.classList.toggle("opacity-0");
-    menu?.classList.toggle("opacity-100");
+  let isOpen = false;
 
-    btn.classList.toggle("open");
+  // Timeline Maestro
+  const tl = gsap.timeline({ paused: true });
 
-    if (btn.classList.contains("open")) {
-      spans[0].classList.add("translate-y-1.5", "rotate-45");
-      spans[1].classList.add("opacity-0");
-      spans[2].classList.add("-translate-y-1.5", "-rotate-45");
-    } else {
-      spans[0].classList.remove("translate-y-1.5", "rotate-45");
-      spans[1].classList.remove("opacity-0");
-      spans[2].classList.remove("-translate-y-1.5", "-rotate-45");
-    }
+  tl.set(menu, { autoAlpha: 1 })
+    .to(curtain, { translateY: "0%", duration: 0.6, ease: "expo.inOut" })
+    .to(
+      content,
+      { translateY: "0%", duration: 0.6, ease: "expo.inOut" },
+      "-=0.4",
+    )
+    .to(
+      mobileLinks,
+      { y: 0, duration: 0.8, stagger: 0.1, ease: "power4.out" },
+      "-=0.2",
+    )
+    .to(footerInfo, { opacity: 1, y: -20, duration: 0.4 }, "-=0.5");
+
+  // Función para cerrar el menú (reutilizable)
+  const toggleMenu = () => {
+    isOpen = !isOpen;
+
+    // Animación de la hamburguesa
+    gsap.to(lines[0], {
+      rotate: isOpen ? 45 : 0,
+      y: isOpen ? 5 : 0,
+      duration: 0.4,
+    });
+    gsap.to(lines[1], {
+      rotate: isOpen ? -45 : 0,
+      y: isOpen ? -5 : 0,
+      duration: 0.4,
+    });
+
+    isOpen ? tl.play() : tl.reverse();
+  };
+
+  // Evento para el botón principal
+  btn?.addEventListener("click", toggleMenu);
+
+  // NUEVO: Cerrar al hacer clic en cualquier enlace
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (isOpen) toggleMenu();
+    });
   });
 </script>
