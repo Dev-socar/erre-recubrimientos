@@ -86,11 +86,14 @@ import "../styles/global.css";
     <slot />
   </body>
 </html>
-<script type="module" src="/src/utils/setupLenis.ts"></script>
 <script>
   import { observerAnimations } from "@/utils/animations";
+import { sendEmail } from '@/utils/SendEmail';
+import { setupLenis } from '@/utils/setupLenis';
 
   document.addEventListener("DOMContentLoaded", () => {
+    setupLenis();
+    sendEmail();
     observerAnimations("bento-item");
     observerAnimations("review-item");
     observerAnimations("service-item");

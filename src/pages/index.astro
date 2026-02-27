@@ -2,16 +2,20 @@
 import Layout from "@/layouts/Layout.astro";
 import { type Service } from "@/types/Service";
 import { type Image } from "@/types/Image";
+import { type Review } from "@/types/Review";
+import { type ListItemContact } from "@/types/ListItemContact";
 import { services } from "@/const/Services";
 import { imagesServices } from "@/const/ImagesServices";
 import ServiceItem from "@/components/ServiceItem.astro";
 import BentoImageItem from "@/components/BentoImageItem.astro";
 import { reviewsList } from "@/const/Reviews";
-import { type Review } from "@/types/Review";
 import ReviewCard from "@/components/ReviewCard.astro";
+import { ItemsContact } from "@/const/ItemsContact";
+import ContactItem from "@/components/ContactItem.astro";
 
 const images: Image[] = imagesServices;
 const reviews: Review[] = reviewsList;
+const itemsContact: ListItemContact[] = ItemsContact;
 ---
 
 <Layout>
@@ -77,40 +81,128 @@ const reviews: Review[] = reviewsList;
       </div>
     </section>
 
-    <section class="container mx-auto max-w-5xl px-2 md:px-5 py-10">
-      <form id="contactForm">
-        <input type="text" name="name" required />
-        <input type="email" name="email" required />
-        <textarea name="message" required></textarea>
-        <button type="submit">Enviar</button>
-      </form>
+    <section class="bg-[#0d0d0d]" id="contacto">
+      <div
+        class="container mx-auto max-w-7xl px-5 py-20 lg:flex lg:items-center lg:justify-between"
+      >
+        <div class="flex-1">
+          <h2 class="text-primary uppercase">Contacto</h2>
+          <p class="text-white text-5xl my-3">Hablemos de tu proyecto</p>
+          <p class="text-primary mt-10 w-[70%] max-w-lg">
+            Completa el formulario y nos pondremos en contacto contigo para
+            ofrecerte una cotización personalizada sin compromiso.
+          </p>
+          <div>
+            <ul class="mt-10 space-y-8">
+              {
+                itemsContact.map((item: ListItemContact) => (
+                  <ContactItem item={item} />
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <form id="contactForm" class="space-y-10 mt-20 flex-1">
+          <div class="space-y-2">
+            <label
+              for="name"
+              class="block uppercase text-primary tracking-widest text-sm"
+              >Nombre completo</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              class="border-b border-primary w-full outline-0 p-2 text-white placeholder:text-primary"
+              placeholder="Tu nombre"
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="space-y-10 lg:flex lg:space-x-10 lg:space-y-0">
+            <div class="space-y-2 lg:flex-1">
+              <label
+                for="email"
+                class="block uppercase text-primary tracking-widest text-sm"
+                >Correo electrónico</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                class="border-b border-primary w-full outline-0 p-2 text-white placeholder:text-primary"
+                placeholder="tu@email.com"
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="space-y-2 lg:flex-1">
+              <label
+                for="phone"
+                class="block uppercase text-primary tracking-widest text-sm"
+                >Número de teléfono</label
+              >
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                required
+                class="border-b border-primary w-full outline-0 p-2 text-white placeholder:text-primary"
+                placeholder="+52 1 234 567 8901"
+                autocomplete="photo"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label
+              for="services"
+              class="block uppercase text-primary tracking-widest text-sm"
+              >Servicios</label
+            >
+            <select
+              name="services"
+              id="services"
+              required
+              class="border-b border-primary w-full outline-0 p-2 text-white bg-[#0d0d0d] cursor-pointer"
+            >
+              <option value="">Selecciona un servicio</option>
+              <option value="Pintura residencial y comercial"
+                >Pintura residencial y comercial</option
+              >
+              <option value="Impermeabilización">Impermeabilización</option>
+              <option value="Aplicación de pasta">Mantenimiento</option>
+              <option value="Aplicación de chukum">Aplicación de chukum</option>
+              <option value="Servicios de electricidad"
+                >Servicios de electricidad</option
+              >
+              <option value="Plomeria">Plomeria</option>
+            </select>
+          </div>
+
+          <div class="space-y-2">
+            <label
+              for="message"
+              class="block uppercase text-primary tracking-widest text-sm"
+              >Mensaje</label
+            >
+            <textarea
+              name="message"
+              id="message"
+              required
+              class="border-b border-primary w-full outline-0 p-2 text-white placeholder:text-primary min-h-35"
+              placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+          </div>
+          <button
+            type="submit"
+            class="group inline-flex items-center gap-4 border border-primary text-white px-10 py-5 text-xs uppercase tracking-[0.15em] hover:bg-white hover:text-primary transition-all duration-500 cursor-pointer"
+            >Enviar Mensaje</button
+          >
+        </form>
+      </div>
     </section>
   </main>
 </Layout>
-
-<script>
-  const form = document.getElementById("contactForm") as HTMLFormElement;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-
-    const data = Object.fromEntries(formData.entries());
-
-    const res = await fetch("/api/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (res.ok) {
-      alert("Mensaje enviado correctamente");
-      form.reset();
-    } else {
-      alert("Hubo un error");
-    }
-  });
-</script>
